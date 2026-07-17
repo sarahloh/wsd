@@ -1,0 +1,145 @@
+[
+  {
+    "id": "cashel-blue-cheese",
+    "name": "Cashel Blue Cheese",
+    "slug": "cashel-blue-cheese",
+    "category": "Dairy",
+    "address": "Beechmount Farm, Fethard",
+    "shortDesc": "We are both farmers and farmhouse cheesemakers. Cashel Blue\u00ae is named after our local \u201cRock of Cashel\u201d \u2014 a medieval castle once the seat of the Kings of Munster.",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a26b761190398049321f1b5_CB-Cheese-02a.webp",
+    "lat": 52.4721,
+    "lng": -7.6889
+  },
+  {
+    "id": "glenpatrick",
+    "name": "Glenpatrick",
+    "slug": "glenpatrick",
+    "category": "Beverages",
+    "address": "Powerstown, Clonmel",
+    "shortDesc": "With 40 years of experience, Glenpatrick Spring is a leading manufacturer of water and soft drinks, specialising in private label products.",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a26b816fd7170d0a57a0359_GP-Logo-HiRes.webp",
+    "lat": 52.3481,
+    "lng": -7.71
+  },
+  {
+    "id": "merrys",
+    "name": "Merrys",
+    "slug": "merrys",
+    "category": "Beverages",
+    "address": "Cashel Rd, Clonmel",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.352,
+    "lng": -7.68
+  },
+  {
+    "id": "oak-park",
+    "name": "Oak Park",
+    "slug": "oak-park",
+    "category": "Meat",
+    "address": "Clogheen Rd, Cahir",
+    "shortDesc": "Oakpark is part of the family-owned Brett Group started in 1940 \u2014 growing from a small agricultural merchant to a multinational pork and bacon processor.",
+    "logo": "",
+    "lat": 52.3741,
+    "lng": -7.9215
+  },
+  {
+    "id": "blanco-nino",
+    "name": "Blanco Nino",
+    "slug": "blanco-nino",
+    "category": "Sauces, Condiments & Snacks",
+    "address": "Carrigeen Business Park, Clonmel",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.35,
+    "lng": -7.695
+  },
+  {
+    "id": "abp",
+    "name": "ABP",
+    "slug": "abp",
+    "category": "Meat",
+    "address": "Thurles",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.6818,
+    "lng": -7.8031
+  },
+  {
+    "id": "ballybrado",
+    "name": "Ballybrado",
+    "slug": "ballybrado",
+    "category": "Bakery",
+    "address": "Cahir area",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.41,
+    "lng": -8.05
+  },
+  {
+    "id": "clonmore-farm",
+    "name": "Clonmore Farm",
+    "slug": "clonmore-farm",
+    "category": "Produce",
+    "address": "",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.52,
+    "lng": -7.75
+  },
+  {
+    "id": "renegade",
+    "name": "Renegade",
+    "slug": "renegade",
+    "category": "Sauces, Condiments & Snacks",
+    "address": "Clonmel",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.358,
+    "lng": -7.705
+  },
+  {
+    "id": "ori-foods",
+    "name": "Ori Foods",
+    "slug": "ori-foods",
+    "category": "Dairy",
+    "address": "Tipperary Town",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.4736,
+    "lng": -8.1558
+  },
+  {
+    "id": "rivesci",
+    "name": "Rivesci",
+    "slug": "rivesci",
+    "category": "Sauces, Condiments & Snacks",
+    "address": "80 Irishtown, Clonmel",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.356,
+    "lng": -7.702
+  },
+  {
+    "id": "fitfix",
+    "name": "Fitfix",
+    "slug": "fitfix",
+    "category": "Sauces, Condiments & Snacks",
+    "address": "",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.8643,
+    "lng": -8.1972
+  },
+  {
+    "id": "o-donnells",
+    "name": "O Donnells",
+    "slug": "o-donnells",
+    "category": "Sauces, Condiments & Snacks",
+    "address": "",
+    "shortDesc": "",
+    "logo": "",
+    "lat": 52.75,
+    "lng": -7.9
+  }
+]

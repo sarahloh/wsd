@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tipperary Food & Drink Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+<style>
+:root {
+  --cream:#F6F3EE; --white:#FFFFFF; --dark:#1A1A1A; --mid:#72706D;
+  --border:#E3DED6; --accent:#2B5F43; --accent-pale:#EBF2ED;
+  --sidebar:320px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0;z-index:900}
+.logo{font-family:'Libre Baskerville',serif;font-size:15px;letter-spacing:-.01em;color:var(--dark);line-height:1.2}
+.logo em{font-style:italic;color:var(--accent)}
+.header-pill{font-size:11px;font-weight:500;color:var(--mid);background:var(--cream);border:1px solid var(--border);border-radius:20px;padding:4px 12px;letter-spacing:.02em}
+
+/* LAYOUT */
+.layout{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* SIDEBAR */
+aside{width:var(--sidebar);background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;height:100%;min-height:0}
+.sidebar-top{padding:16px 16px 0;flex-shrink:0}
+
+/* Search */
+.search-wrap{position:relative;margin-bottom:14px}
+.search-wrap input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--border);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;background:var(--cream);color:var(--dark);outline:none;transition:border-color .15s}
+.search-wrap input::placeholder{color:#AAA7A2}
+.search-wrap input:focus{border-color:var(--accent);background:var(--white)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#BCBAB6;pointer-events:none}
+
+/* Chips */
+.filter-label{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#BCBAB6;margin-bottom:9px}
+.filters{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.chip{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:11.5px;color:var(--mid);cursor:pointer;transition:all .12s;white-space:nowrap}
+.chip .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.chip.on{background:var(--accent-pale);border-color:var(--accent);color:var(--accent);font-weight:500}
+.chip:hover:not(.on){border-color:#C0BDB8;color:var(--dark)}
+
+/* Results bar */
+.results-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--cream);flex-shrink:0}
+.results-bar span{font-size:11.5px;color:var(--mid)}
+.clear-btn{font-size:11.5px;color:var(--accent);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;display:none}
+.clear-btn.on{display:block}
+
+/* List */
+.loc-list{overflow-y:auto;flex:1;min-height:0}
+.loc-list::-webkit-scrollbar{width:3px}
+.loc-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.loc-item{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s}
+.loc-item:hover{background:var(--cream)}
+.loc-item.active{background:var(--accent-pale)}
+.loc-logo{width:36px;height:36px;border-radius:6px;border:1px solid var(--border);background:var(--cream);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.loc-logo img{width:100%;height:100%;object-fit:cover}
+.loc-logo .dot{width:10px;height:10px;border-radius:50%}
+.loc-body{flex:1;min-width:0}
+.loc-name{font-size:13.5px;font-weight:500;color:var(--dark);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loc-meta{font-size:11.5px;color:var(--mid)}
+.loc-arrow{color:var(--border);font-size:14px;margin-top:3px;flex-shrink:0;transition:color .12s}
+.loc-item:hover .loc-arrow{color:var(--accent)}
+.no-results{padding:40px 16px;text-align:center;color:var(--mid);font-size:13px;display:none;line-height:1.6}
+.no-results strong{display:block;color:var(--dark);margin-bottom:4px;font-size:14px}
+
+/* Loading state */
+.loading{padding:40px 16px;text-align:center;color:var(--mid);font-size:13px}
+.loading-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin:0 2px;animation:pulse 1.2s ease-in-out infinite}
+.loading-dot:nth-child(2){animation-delay:.2s}
+.loading-dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+/* MAP */
+#map{flex:1;z-index:1}
+
+/* Popup */
+.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 4px 20px rgba(0,0,0,.10)!important;border:1px solid var(--border);padding:0!important;overflow:hidden}
+.leaflet-popup-content{margin:0!important;width:230px!important}
+.popup-body{padding:14px 14px 10px}
+.popup-logo{width:40px;height:40px;border-radius:6px;border:1px solid var(--border);background:var(--cream);overflow:hidden;margin-bottom:10px;display:flex;align-items:center;justify-content:center}
+.popup-logo img{width:100%;height:100%;object-fit:cover}
+.popup-cat{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.popup-name{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--dark);margin-bottom:3px;line-height:1.3}
+.popup-addr{font-size:11.5px;color:var(--mid);margin-bottom:10px}
+.popup-desc{font-size:11.5px;color:var(--mid);line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.popup-link{display:block;text-align:center;padding:9px;background:var(--accent);color:#fff;font-size:12px;font-weight:500;text-decoration:none;letter-spacing:.02em;transition:background .12s}
+.popup-link:hover{background:#234e38}
+.leaflet-popup-tip-container{display:none}
+.leaflet-popup-close-button{color:var(--mid)!important;font-size:16px!important;top:8px!important;right:8px!important}
+
+/* Cluster */
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background-color:rgba(43,95,67,.15)!important}
+.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background-color:rgba(43,95,67,.82)!important;color:#fff!important;font-family:'DM Sans',sans-serif!important;font-weight:500!important;font-size:12px!important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Tipperary <em>Food &amp; Drink</em> Directory</div>
+  <div class="header-pill" id="headerPill">Loading…</div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-top">
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Search producers or towns…" disabled>
+      </div>
+      <p class="filter-label">Category</p>
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="results-bar">
+      <span id="resultsCount"></span>
+      <button class="clear-btn" id="clearBtn">Clear all</button>
+    </div>
+    <div class="loc-list" id="locList">
+      <div class="loading">
+        <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
+      </div>
+    </div>
+    <div class="no-results" id="noResults">
+      <strong>No producers found</strong>Try adjusting your search or filters.
+    </div>
+  </aside>
+  <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+<script>
+
+const CATS = {
+  'Dairy':                       '#3A7CA5',
+  'Beverages':                   '#B85C38',
+  'Sauces, Condiments & Snacks': '#7B5EA7',
+  'Meat':                        '#A83232',
+  'Bakery':                      '#C49A1A',
+  'Produce':                     '#2B5F43',
+};
+
+// ── UPDATE THESE URLS ─────────────────────────────────────────────
+// Host producers.json anywhere (GitHub, Cloudflare R2, your own server)
+// and paste the public URL below. tipperary-boundary.json is static
+// and can live on the same host.
+const PRODUCERS_URL = 'https://raw.githubusercontent.com/sarahloh/wsd/refs/heads/main/producers.json';
+const BOUNDARY_URL  = 'https://raw.githubusercontent.com/sarahloh/wsd/refs/heads/main/tipperary-boundary.json';
+
+// ── MAP SHELL ─────────────────────────────────────────────────────
+const map = L.map('map', {zoomControl:false});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution:'&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://openstreetmap.org">OSM</a>',
+  subdomains:'abcd', maxZoom:19
+}).addTo(map);
+
+L.control.zoom({position:'bottomright'}).addTo(map);
+
+const clusters = L.markerClusterGroup({
+  maxClusterRadius:36, spiderfyOnMaxZoom:true, showCoverageOnHover:false
+});
+
+const markerMap = {};
+let activeCats = new Set();
+let query = '';
+let activeId = null;
+let ALL_PRODUCERS = [];
+
+function pinIcon(cat) {
+  const col = CATS[cat] || '#888';
+  return L.divIcon({
+    html:`<svg xmlns="http://www.w3.org/2000/svg" width="26" height="34" viewBox="0 0 26 34">
+      <path d="M13 0C5.82 0 0 5.82 0 13c0 8.58 13 21 13 21S26 21.58 26 13C26 5.82 20.18 0 13 0z" fill="${col}"/>
+      <circle cx="13" cy="13" r="5.5" fill="white" opacity=".88"/>
+    </svg>`,
+    iconSize:[26,34], iconAnchor:[13,34], popupAnchor:[0,-36], className:''
+  });
+}
+
+function filtered() {
+  return ALL_PRODUCERS.filter(p => {
+    const catOk = activeCats.size === 0 || activeCats.has(p.category);
+    const q = query.toLowerCase();
+    const qOk = !q
+      || p.name.toLowerCase().includes(q)
+      || (p.address||'').toLowerCase().includes(q)
+      || p.category.toLowerCase().includes(q);
+    return catOk && qOk;
+  });
+}
+
+function render() {
+  const list = filtered();
+  const ids  = new Set(list.map(p => p.id));
+
+  clusters.clearLayers();
+  ALL_PRODUCERS.forEach(p => { if (ids.has(p.id)) clusters.addLayer(markerMap[p.id]); });
+
+  renderList(list);
+
+  const label = `${list.length} producer${list.length !== 1 ? 's' : ''}`;
+  document.getElementById('resultsCount').textContent = label;
+  document.getElementById('headerPill').textContent   = label;
+
+  const hasFilter = activeCats.size > 0 || query;
+  document.getElementById('clearBtn').classList.toggle('on', hasFilter);
+  document.getElementById('noResults').style.display = list.length ? 'none' : 'block';
+  document.getElementById('locList').style.display   = list.length ? '' : 'none';
+}
+
+function renderList(producers) {
+  const el = document.getElementById('locList');
+  el.innerHTML = '';
+  producers.forEach(p => {
+    const col = CATS[p.category] || '#888';
+    const logoHtml = p.logo
+      ? `<img src="${p.logo}" alt="${p.name}" loading="lazy">`
+      : `<span class="dot" style="background:${col}"></span>`;
+    const div = document.createElement('div');
+    div.className = 'loc-item' + (p.id === activeId ? ' active' : '');
+    div.dataset.id = p.id;
+    div.innerHTML = `
+      <div class="loc-logo">${logoHtml}</div>
+      <div class="loc-body">
+        <div class="loc-name">${p.name}</div>
+        <div class="loc-meta" style="color:${col}">${p.category}${p.address ? ' · '+p.address : ''}</div>
+      </div>
+      <span class="loc-arrow">›</span>`;
+    div.addEventListener('click', () => {
+      map.setView([p.lat, p.lng], 14);
+      markerMap[p.id].openPopup();
+      activateItem(p.id);
+    });
+    el.appendChild(div);
+  });
+}
+
+function activateItem(id) {
+  activeId = id;
+  document.querySelectorAll('.loc-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.id === id);
+  });
+  const el = document.querySelector(`.loc-item[data-id="${id}"]`);
+  if (el) el.scrollIntoView({block:'nearest', behavior:'smooth'});
+}
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  query = e.target.value.trim();
+  render();
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  activeCats.clear();
+  query = '';
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.chip').forEach(b => b.classList.remove('on'));
+  render();
+});
+
+// ── INIT: FETCH DATA ──────────────────────────────────────────────
+async function init() {
+  try {
+    const [producersRes, boundaryRes] = await Promise.all([
+      fetch(PRODUCERS_URL),
+      fetch(BOUNDARY_URL),
+    ]);
+
+    if (!producersRes.ok) throw new Error(`producers.json: ${producersRes.status}`);
+    if (!boundaryRes.ok)  throw new Error(`boundary.json: ${boundaryRes.status}`);
+
+    const [PRODUCERS, TIPPERARY] = await Promise.all([
+      producersRes.json(),
+      boundaryRes.json(),
+    ]);
+
+    ALL_PRODUCERS = PRODUCERS;
+
+    // County boundary
+    const countyLayer = L.geoJSON(TIPPERARY, {
+      style:{color:'#2B5F43',weight:2,opacity:.55,fillColor:'#2B5F43',fillOpacity:.04,dashArray:'5 5'}
+    }).addTo(map);
+    map.fitBounds(countyLayer.getBounds(), {padding:[20,20]});
+
+    // Build markers
+    PRODUCERS.forEach(p => {
+      const m = L.marker([p.lat, p.lng], {icon: pinIcon(p.category)});
+      const col = CATS[p.category] || '#888';
+      const logoHtml = p.logo ? `<div class="popup-logo"><img src="${p.logo}" alt="${p.name}" loading="lazy"></div>` : '';
+      const addrHtml = p.address ? `<div class="popup-addr">📍 ${p.address}</div>` : '';
+      const descHtml = p.shortDesc ? `<div class="popup-desc">${p.shortDesc}</div>` : '';
+      m.bindPopup(`
+        <div class="popup-body">
+          ${logoHtml}
+          <div class="popup-cat" style="color:${col}">${p.category}</div>
+          <div class="popup-name">${p.name}</div>
+          ${addrHtml}${descHtml}
+        </div>
+        <a class="popup-link" href="/directory/${p.slug}">View producer →</a>
+      `, {maxWidth:230});
+      m.on('click', () => activateItem(p.id));
+      markerMap[p.id] = m;
+    });
+
+    clusters.addTo(map);
+
+    // Category chips
+    const filtersEl = document.getElementById('filters');
+    Object.entries(CATS).forEach(([cat, col]) => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.innerHTML = `<span class="dot" style="background:${col}"></span>${cat}`;
+      btn.addEventListener('click', () => {
+        activeCats.has(cat) ? activeCats.delete(cat) : activeCats.add(cat);
+        btn.classList.toggle('on');
+        render();
+      });
+      filtersEl.appendChild(btn);
+    });
+
+    document.getElementById('searchInput').disabled = false;
+    render();
+
+  } catch(err) {
+    document.getElementById('locList').innerHTML =
+      `<div class="loading" style="color:#A83232">Failed to load producers.<br><small>${err.message}</small></div>`;
+    document.getElementById('headerPill').textContent = 'Error';
+    console.error('Map init error:', err);
+  }
+}
+
+init();
+</script>
+</body>
+</html>

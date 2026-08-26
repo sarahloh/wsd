@@ -28,7 +28,7 @@
     "category": "Beverages",
     "address": "Cashel Rd, Clonmel",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a8ea2016cce5f625613a82e_merrys.jpeg",
     "lat": 52.3621932,
     "lng": -7.7193383
   },
@@ -39,7 +39,7 @@
     "category": "Meat",
     "address": "Clogheen Rd, Cahir",
     "shortDesc": "Oakpark is part of the family-owned Brett Group started in 1940 \u2014 growing from a small agricultural merchant to a multinational pork and bacon processor.",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a8ea25a2da676b3c7266ba8_oakpark.jpeg",
     "lat": 52.3724103,
     "lng": -7.9338283
   },
@@ -50,7 +50,7 @@
     "category": "Sauces, Condiments & Snacks",
     "address": "Carrigeen Business Park, Clonmel",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a5a0c580e551fb1cd2ace7b_BlancoNinoLtd.png",
     "lat": 52.3647305,
     "lng": -7.7010092
   },
@@ -61,7 +61,7 @@
     "category": "Meat",
     "address": "Thurles",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a5a0c2dc660b09c413ab2c5_apb-logo.png",
     "lat": 52.3613749,
     "lng": -7.9383768
   },
@@ -72,7 +72,7 @@
     "category": "Bakery",
     "address": "Cahir area",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a57601f784ea9056f37f91b_BallyBradoBrandLogo2.png",
     "lat": 52.3365138,
     "lng": -7.9152627
   },
@@ -83,7 +83,7 @@
     "category": "Produce",
     "address": "",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a5a0ce97ef93fbee8a6f139_154916590_180353436934024_3565553432300722617_n.jpg",
     "lat": 52.3572222,
     "lng": -7.9721031
   },
@@ -94,7 +94,7 @@
     "category": "Sauces, Condiments & Snacks",
     "address": "Clonmel",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a576215f776c79f83b587e5_Renegade%202.jpg",
     "lat": 52.5103244,
     "lng": -7.8973894
   },
@@ -105,7 +105,7 @@
     "category": "Sauces, Condiments & Snacks",
     "address": "80 Irishtown, Clonmel",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a576613d7bb6c0da0fad261_Rivesci_Logo_200x%402x.webp",
     "lat": 52.3521528,
     "lng": -7.7199373
   },
@@ -116,7 +116,7 @@
     "category": "Sauces, Condiments & Snacks",
     "address": "",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a8ea230723ac94074d85c53_FtiFix-Logo.png",
     "lat": 52.9576197,
     "lng": -7.8045658
   },
@@ -127,7 +127,7 @@
     "category": "Sauces, Condiments & Snacks",
     "address": "",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a57641ab5c06736ca38e768_Ryans%20of%20Tipperary.jpg",
     "lat": 52.4743769,
     "lng": -8.1608137
   },
@@ -138,7 +138,7 @@
     "category": "Bakery",
     "address": "",
     "shortDesc": "",
-    "logo": "",
+    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a8ea2b2e4e1f8425286438d_nutshed.webp",
     "lat": 52.8606955,
     "lng": -8.2047275
   }

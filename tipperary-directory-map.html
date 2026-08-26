@@ -153,6 +153,12 @@ const CATS = {
 const PRODUCERS_URL = 'https://raw.githubusercontent.com/sarahloh/wsd/refs/heads/main/producers.json';
 const BOUNDARY_URL  = 'https://raw.githubusercontent.com/sarahloh/wsd/refs/heads/main/tipperary-boundary.json';
 
+// This map is embedded via iframe on the Webflow site, so producer links
+// must be absolute to that site (a relative link would resolve against
+// github.io, the iframe's own origin) and use target="_top" to break out
+// of the iframe rather than loading the site inside the map's iframe box.
+const SITE_URL = 'https://tipperary-food-drink.webflow.io';
+
 // ── MAP SHELL ─────────────────────────────────────────────────────
 const map = L.map('map', {zoomControl:false});
 
@@ -302,7 +308,7 @@ async function init() {
           <div class="popup-name">${p.name}</div>
           ${addrHtml}${descHtml}
         </div>
-        <a class="popup-link" href="/directory/${p.slug}">View producer →</a>
+        <a class="popup-link" href="${SITE_URL}/directory/${p.slug}" target="_top">View producer →</a>
       `, {maxWidth:230});
       m.on('click', () => activateItem(p.id));
       markerMap[p.id] = m;

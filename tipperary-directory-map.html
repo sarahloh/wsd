@@ -149,7 +149,9 @@ aside{width:var(--sidebar);background:var(--white);border-right:1px solid var(--
 const CATS = {
   'Dairy':                       '#3A7CA5',
   'Beverages':                   '#B85C38',
-  'Sauces, Condiments & Snacks': '#7B5EA7',
+  'Sauces':                      '#7B5EA7',
+  'Condiments':                  '#7B5EA7',
+  'Snacks':                      '#7B5EA7',
   'Meat':                        '#A83232',
   'Bakery':                      '#C49A1A',
   'Produce':                     '#2B5F43',
@@ -171,9 +173,9 @@ const SITE_URL = 'https://tipperary-food-drink.webflow.io';
 // ── MAP SHELL ─────────────────────────────────────────────────────
 const map = L.map('map', {zoomControl:false});
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png&key=cb1_3ry1_1_5bf4d57f9ddb0698a1972619', {
-  attribution:'&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://openstreetmap.org">OSM</a>',
-  subdomains:'abcd', maxZoom:19
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=YOUR_KEY', {
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains:'abcd', maxZoom:20
 }).addTo(map);
 
 L.control.zoom({position:'bottomright'}).addTo(map);

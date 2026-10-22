@@ -18,8 +18,8 @@
     "address": "Annerville, Clonmel, Co Tipperary",
     "shortDesc": "Bulmers has grown from humble beginnings as a local cidery on Dowd’s Lane in the heart of Clonmel to become Ireland’s largest cider brand, gaining international recognition as an iconically Irish brand.",
     "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6ac39a66ae29d2780f0e7c70_Bulmers_Logo_FOR_DARKER_BACKGROUNDS.png",
-    "lat": 52.1316476,
-    "lng": -8.3371965
+    "lat": 52.3504703,
+    "lng": -7.7749296
   },
   {
     "id": "dew-valley",
@@ -56,7 +56,7 @@
   },
   {
     "id": "oakpark",
-    "name": "Oak Park",
+    "name": "Oakpark",
     "slug": "oakpark",
     "category": "Meat",
     "address": "Clogheen Rd, Cahir",
@@ -150,7 +150,7 @@
     "address": "Roscrea, Co Tipperary",
     "shortDesc": "Rosderra Irish Meats Group processes an extensive range of premium Pork and Bacon products for the Irish & International Markets. Our products areproduced from farms and factories in the Tipperary catchment area and across the country.​",
     "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6ac761dc158caa5fa88e3768_rosdera-logo.png",
-    "lat": 53.4550731,
-    "lng": -8.0880478
+    "lat": 52.94549,
+    "lng": -7.808114
   }
 ]

@@ -1,27 +1,5 @@
 [
   {
-    "id": "cashel-blue-cheese",
-    "name": "Cashel Blue Cheese",
-    "slug": "cashel-blue-cheese",
-    "category": "Dairy",
-    "address": "Beechmount Farm, Fethard",
-    "shortDesc": "Renowned Cashel Blue Cheese is hand crafted in small batches to the original family recipe. Celebrated for its award-winning taste – it has become Ireland Queen of the Blues!",
-    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6a26b761190398049321f1b5_CB-Cheese-02a.webp",
-    "lat": 52.5309785,
-    "lng": -7.7664254
-  },
-  {
-    "id": "bulmers",
-    "name": "Bulmers",
-    "slug": "bulmers",
-    "category": "Beverages",
-    "address": "Annerville, Clonmel, Co Tipperary",
-    "shortDesc": "Bulmers has grown from humble beginnings as a local cidery on Dowd’s Lane in the heart of Clonmel to become Ireland’s largest cider brand, gaining international recognition as an iconically Irish brand.",
-    "logo": "https://cdn.prod.website-files.com/6a22b6aef256b03a31b7f52e/6ac39a66ae29d2780f0e7c70_Bulmers_Logo_FOR_DARKER_BACKGROUNDS.png",
-    "lat": 52.3504703,
-    "lng": -7.7749296
-  },
-  {
     "id": "dew-valley",
     "name": "Dew Valley",
     "slug": "dew-valley",
